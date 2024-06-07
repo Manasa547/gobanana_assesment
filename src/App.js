@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import UsersList from "./components/UsersList";
+import Weather from "./components/Weather";
+import DogImages from "./components/DogImages";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Box,
+  CssBaseline,
+  Button,
+} from "@mui/material";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        <CssBaseline />
+        <AppBar position="static" color="primary">
+          <Toolbar>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              GoBananas App
+            </Typography>
+            <Button color="inherit" component={Link} to="/">
+              Users
+            </Button>
+            <Button color="inherit" component={Link} to="/weather">
+              Weather
+            </Button>
+            <Button color="inherit" component={Link} to="/dogs">
+              Dogs
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <Container sx={{ mt: 4 }}>
+          <Switch>
+            <Route exact path="/" component={UsersList} />
+            <Route path="/weather" component={Weather} />
+            <Route path="/dogs" component={DogImages} />
+          </Switch>
+        </Container>
+      </Box>
+    </Router>
   );
-}
+};
 
 export default App;
